@@ -1,0 +1,120 @@
+@startuml Class Diagram
+
+class User {
+  +id: int
+  +name: string
+  +email: string
+  +password: string
+  +role: string
+  +created_at: datetime
+  +register()
+  +login()
+  +logout()
+}
+
+class Admin {
+  +validateEvent()
+  +manageUsers()
+  +manageCategories()
+  +viewStatistics()
+}
+
+class Organizer {
+  +company_name: string
+  +description: string
+  +status: string
+  +createEvent()
+  +manageBlog()
+  +manageTickets()
+}
+
+class Client {
+  +buyTicket()
+  +viewHistory()
+  +requestOrganizerStatus()
+  +manageOrders()
+}
+
+class Event {
+  +id: int
+  +title: string
+  +description: string
+  +date: datetime
+  +location: string
+  +status: string
+  +organizer_id: int
+  +category_id: int
+  +created_at: datetime
+  +create()
+  +update()
+  +delete()
+  +publish()
+}
+
+class Ticket {
+  +id: int
+  +event_id: int
+  +user_id: int
+  +type: string
+  +price: decimal
+  +status: string
+  +purchase()
+  +cancel()
+  +validate()
+}
+
+class Blog {
+  +id: int
+  +title: string
+  +content: text
+  +author_id: int
+  +status: string
+  +created_at: datetime
+  +publish()
+  +comment()
+  +like()
+}
+
+class Category {
+  +id: int
+  +name: string
+  +description: string
+}
+
+class Comment {
+  +id: int
+  +content: text
+  +user_id: int
+  +target_id: int
+  +target_type: string
+  +created_at: datetime
+}
+
+class Payment {
+  +id: int
+  +amount: decimal
+  +status: string
+  +user_id: int
+  +ticket_id: int
+  +created_at: datetime
+  +process()
+  +refund()
+}
+
+' Relations
+User <|-- Admin
+User <|-- Organizer
+User <|-- Client
+
+Event "1" *-- "many" Ticket
+Event "1" *-- "many" Comment
+Event "many" -- "1" Category
+Event "many" -- "1" Organizer
+
+Blog "1" *-- "many" Comment
+Blog "many" -- "1" User
+
+Ticket "1" -- "1" Payment
+Ticket "many" -- "1" User
+
+@enduml

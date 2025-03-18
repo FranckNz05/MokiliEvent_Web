@@ -1,0 +1,275 @@
+/* Events Grid */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+/* Event Card */
+.event-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.event-card .card-img-wrapper {
+    position: relative;
+    padding-top: 60%; /* 3:2 Aspect Ratio */
+    overflow: hidden;
+}
+
+.event-card .card-img-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.event-card:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+.event-card .event-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 20px;
+    color: white;
+}
+
+.event-card .event-date {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--mokili-red);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.event-card .event-category {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: white;
+    color: var(--mokili-red);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.event-card .card-body {
+    padding: 20px;
+}
+
+.event-card .event-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--mokili-text-primary);
+}
+
+.event-card .event-location {
+    color: var(--mokili-gray);
+    margin-bottom: 15px;
+}
+
+.event-card .event-location i {
+    color: var(--mokili-red);
+    margin-right: 5px;
+}
+
+.event-card .event-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--mokili-red);
+    margin-bottom: 15px;
+}
+
+.event-card .event-organizer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.event-card .organizer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.event-card .organizer-name {
+    color: var(--mokili-text-primary);
+    font-weight: 500;
+}
+
+/* Event Details Page */
+.event-hero {
+    position: relative;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 76px;
+}
+
+.event-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+}
+
+.event-hero-content {
+    position: relative;
+    color: white;
+    padding: 50px 0;
+    z-index: 1;
+}
+
+.event-info-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    margin-top: -50px;
+    position: relative;
+    z-index: 2;
+}
+
+.event-info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.event-info-item i {
+    width: 40px;
+    height: 40px;
+    background: var(--mokili-light-red);
+    color: var(--mokili-red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.ticket-section {
+    background: var(--mokili-light-gray);
+    padding: 50px 0;
+}
+
+.ticket-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+}
+
+.ticket-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-card .ticket-type {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--mokili-text-primary);
+    margin-bottom: 10px;
+}
+
+.ticket-card .ticket-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--mokili-red);
+    margin-bottom: 20px;
+}
+
+.ticket-card .ticket-features {
+    margin-bottom: 20px;
+}
+
+.ticket-card .ticket-features li {
+    margin-bottom: 10px;
+    color: var(--mokili-text-secondary);
+}
+
+.ticket-card .ticket-features i {
+    color: var(--mokili-red);
+    margin-right: 10px;
+}
+
+/* Event Categories */
+.event-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.category-filter {
+    background: var(--mokili-light-gray);
+    color: var(--mokili-text-primary);
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-filter:hover,
+.category-filter.active {
+    background: var(--mokili-red);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .event-hero {
+        height: 300px;
+    }
+
+    .event-info-card {
+        margin-top: -30px;
+        padding: 20px;
+    }
+
+    .ticket-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .event-card .event-date,
+    .event-card .event-category {
+        padding: 5px 10px;
+        font-size: 0.9rem;
+    }
+
+    .event-hero {
+        height: 250px;
+    }
+
+    .event-hero-content {
+        padding: 30px 0;
+    }
+}

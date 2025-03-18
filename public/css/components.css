@@ -1,0 +1,301 @@
+/* Cards */
+.event-card {
+    transition: transform 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+.event-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.event-card .event-date {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--mokili-red);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.event-card .event-category {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--mokili-red);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Blog Posts */
+.blog-card {
+    transition: transform 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-card .card-img-top {
+    height: 250px;
+    object-fit: cover;
+}
+
+.blog-card .blog-date {
+    color: var(--mokili-gray);
+    font-size: 0.9rem;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/hero-img-2.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 150px 0;
+    color: white;
+    margin-top: 76px;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+/* Search Form */
+.search-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-form .form-control {
+    border: 1px solid #ced4da;
+    padding: 12px;
+}
+
+.search-form .form-control:focus {
+    border-color: var(--mokili-red);
+    box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25);
+}
+
+/* Category Pills */
+.category-pill {
+    background: var(--mokili-light-gray);
+    color: var(--mokili-text-primary);
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin: 5px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.category-pill:hover,
+.category-pill.active {
+    background: var(--mokili-red);
+    color: white;
+    text-decoration: none;
+}
+
+/* Event Details */
+.event-details {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.event-details .event-header {
+    border-bottom: 2px solid var(--mokili-red);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.event-details .event-info {
+    margin: 20px 0;
+}
+
+.event-details .event-info i {
+    color: var(--mokili-red);
+    margin-right: 10px;
+}
+
+/* Ticket Types */
+.ticket-type {
+    background: var(--mokili-light-gray);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.ticket-type:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-type .price {
+    font-size: 1.5rem;
+    color: var(--mokili-red);
+    font-weight: bold;
+}
+
+/* Profile Section */
+.profile-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--mokili-red);
+}
+
+/* Dashboard Stats */
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card i {
+    font-size: 2rem;
+    color: var(--mokili-red);
+}
+
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--mokili-text-primary);
+}
+
+/* Testimonials */
+.testimonial-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px 10px;
+}
+
+.testimonial-card .quote {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.testimonial-card .author-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+/* Contact Form */
+.contact-form {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info {
+    background: var(--mokili-red);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.contact-info i {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+/* Custom Buttons */
+.btn-square {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 99;
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border: 3px solid var(--mokili-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+    background: var(--mokili-dark-red);
+    border-color: var(--mokili-dark-red);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 100px 0;
+        margin-top: 60px;
+    }
+    
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    
+    .search-form {
+        margin-top: 20px;
+    }
+    
+    .event-card .card-img-top,
+    .blog-card .card-img-top {
+        height: 180px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .stat-card {
+        margin-bottom: 20px;
+    }
+    
+    .contact-info {
+        margin-top: 20px;
+    }
+}

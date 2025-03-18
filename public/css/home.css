@@ -1,0 +1,130 @@
+/* Card Hover Effects */
+.hover-effect {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hover-effect:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Event Cards */
+.event-card {
+    height: 100%;
+}
+
+.card-img-wrapper {
+    position: relative;
+    padding-top: 66.67%; /* 3:2 Aspect Ratio */
+    overflow: hidden;
+}
+
+.card-img-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event-date, .event-category {
+    position: absolute;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.event-date {
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 0, 0, 0.9);
+    color: white;
+}
+
+.event-category {
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+}
+
+.event-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 15px 0;
+    color: #333;
+}
+
+.event-location {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.event-stats {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.stats span {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Organizer Cards */
+.organizer-card {
+    padding: 30px;
+}
+
+.organizer-card img {
+    border: 5px solid rgba(255, 0, 0, 0.1);
+    padding: 5px;
+}
+
+.organizer-stats {
+    margin: 20px 0;
+}
+
+/* Blog Cards */
+.blog-card {
+    height: 100%;
+}
+
+.blog-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.blog-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 10px 0;
+    color: #333;
+}
+
+.blog-excerpt {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .event-card, .organizer-card, .blog-card {
+        margin-bottom: 20px;
+    }
+    
+    .stats span {
+        font-size: 0.8rem;
+    }
+    
+    .event-title, .blog-title {
+        font-size: 1.1rem;
+    }
+}

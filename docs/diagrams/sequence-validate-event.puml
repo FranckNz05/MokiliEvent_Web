@@ -1,0 +1,66 @@
+@startuml Sequence Diagram - Validate Event
+
+actor Admin
+participant "Interface Web" as UI
+participant "Système" as System
+participant "Base de données" as DB
+participant "Organisateur" as Organizer
+
+== Notification et Examen ==
+
+System -> Admin: Notifie nouvel événement
+Admin -> UI: Accède aux détails
+UI -> System: Demande informations
+System -> DB: Récupère événement
+DB --> System: Retourne détails
+System --> UI: Affiche détails événement
+
+Admin -> UI: Examine informations
+note right
+    Vérifie:
+    - Conformité du contenu
+    - Prix appropriés
+    - Images appropriées
+    - Détails complets
+end note
+
+== Décision ==
+
+alt Événement approuvé
+    Admin -> UI: Approuve événement
+    UI -> System: Transmet approbation
+    System -> DB: Met à jour statut
+    System -> DB: Active vente billets
+    DB --> System: Confirme changements
+    
+    System -> Organizer: Envoie notification
+    System -> Organizer: Envoie email confirmation
+    
+    System --> UI: Confirme publication
+    UI --> Admin: Affiche confirmation
+else Événement refusé
+    Admin -> UI: Refuse événement
+    Admin -> UI: Ajoute commentaires
+    UI -> System: Transmet refus
+    System -> DB: Met à jour statut
+    DB --> System: Confirme mise à jour
+    
+    System -> Organizer: Envoie notification
+    System -> Organizer: Envoie email avec motifs
+    
+    System --> UI: Confirme action
+    UI --> Admin: Affiche confirmation
+end
+
+== Suivi ==
+
+alt Événement approuvé
+    System -> DB: Programme notifications
+    System -> DB: Active surveillance stats
+else Événement refusé
+    Organizer -> UI: Modifie événement
+    UI -> System: Soumet modifications
+    System -> Admin: Notifie modifications
+end
+
+@enduml

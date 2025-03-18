@@ -1,0 +1,45 @@
+@startuml Sequence Diagram - Create Event
+
+actor Organisateur
+participant "Interface Web" as UI
+participant "Système" as System
+participant "Base de données" as DB
+participant "Admin" as Admin
+
+Organisateur -> UI: Accède au formulaire création
+UI -> System: Demande formulaire
+System -> DB: Récupère catégories
+DB --> System: Liste des catégories
+System --> UI: Affiche formulaire
+
+Organisateur -> UI: Remplit détails événement
+Organisateur -> UI: Soumet formulaire
+UI -> System: Valide données
+
+alt Données valides
+    System -> DB: Enregistre événement
+    DB --> System: Confirme enregistrement
+    System -> Admin: Notifie nouvelle demande
+    System --> UI: Confirme soumission
+    UI --> Organisateur: Affiche confirmation
+else Données invalides
+    System --> UI: Retourne erreurs
+    UI --> Organisateur: Affiche erreurs
+end
+
+== Processus de validation ==
+
+Admin -> System: Examine événement
+alt Événement approuvé
+    Admin -> System: Approuve événement
+    System -> DB: Met à jour statut
+    DB --> System: Confirme mise à jour
+    System -> Organisateur: Notifie approbation
+else Événement refusé
+    Admin -> System: Refuse événement
+    System -> DB: Met à jour statut
+    DB --> System: Confirme mise à jour
+    System -> Organisateur: Notifie refus
+end
+
+@enduml

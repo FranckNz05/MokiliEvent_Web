@@ -1,0 +1,355 @@
+DOCUMENTATION DE LA BASE DE DONNÉES MOKILIEVENT
+
+1. STRUCTURE DES TABLES
+
+1.1 Table Users (users)
+----------------
+- id (PK, auto-increment)
+- prenom (string)
+- nom (string)
+- email (string, unique)
+- password (string, hashé)
+- genre (enum: Homme, Femme, Autre)
+- profil_image (string, nullable)
+- tranche_age (string)
+- telephone (string)
+- ville (string)
+- pays (string)
+- centres_interets (text)
+- is_active (boolean, default: true)
+- derniere_connexion (timestamp)
+- created_at, updated_at (timestamps)
+- deleted_at (softDeletes)
+
+1.2 Table Organisateurs (organisateurs)
+----------------------
+- id (PK, auto-increment)
+- user_id (FK -> users.id)
+- code_unique (string, unique) - pour l'application de scan
+- nom_entreprise (string)
+- slogan (string, nullable)
+- liens_reseaux_sociaux (json)
+- created_at, updated_at (timestamps)
+- deleted_at (softDeletes)
+
+1.3 Table Demandes Organisateur (demandes_organisateur)
+----------------------------------------
+- id (PK, auto-increment)
+- user_id (FK -> users.id)
+- nom_entreprise (string)
+- description_activite (text)
+- experience_evenementielle (text)
+- motivation (text)
+- documents_supplementaires (json, nullable) - Pour stocker les chemins des documents uploadés
+- statut (enum: en_attente, approuve, refuse)
+- commentaire_admin (text, nullable)
+- date_traitement (timestamp, nullable)
+- created_at, updated_at (timestamps)
+
+1.4 Table Demandes Publication Evenement (demandes_publication_evenement)
+------------------------------------------------
+- id (PK, auto-increment)
+- organisateur_id (FK -> organisateurs.id)
+- evenement_id (FK -> events.id)
+- message_motivation (text)
+- documents_support (json, nullable)
+- statut (enum: en_attente, approuve, refuse)
+- commentaire_admin (text, nullable)
+- date_traitement (timestamp, nullable)
+- created_at, updated_at (timestamps)
+
+1.5 Table Events (events)
+-------------------
+- id (PK, auto-increment)
+- organisateur_id (FK -> organisateurs.id)
+- nom (string)
+- description (text)
+- date_debut (datetime)
+- date_fin (datetime)
+- lieu (string)
+- image (string)
+- statut_demande (enum: en_attente, approuve, refuse, default: en_attente)
+- message_motivation (text)
+- conditions_remboursement (text)
+- created_at, updated_at (timestamps)
+- deleted_at (softDeletes)
+
+1.6 Table Billets (billets)
+----------------
+- id (PK, auto-increment)
+- evenement_id (FK -> events.id)
+- type (string)
+- description (text)
+- prix (decimal, 10,2)
+- quantite (integer)
+- quantite_disponible (integer)
+- created_at, updated_at (timestamps)
+
+1.7 Table Categories (categories)
+-------------------
+- id (PK, auto-increment)
+- nom (string)
+- description (text, nullable)
+- created_at, updated_at (timestamps)
+
+1.8 Table Tags (tags)
+-------------
+- id (PK, auto-increment)
+- nom (string)
+- created_at, updated_at (timestamps)
+
+1.9 Table Evenement_Categories (evenement_categories)
+------------------------------------------
+- evenement_id (FK -> events.id)
+- categorie_id (FK -> categories.id)
+- created_at, updated_at (timestamps)
+
+1.10 Table Evenement_Tags (evenement_tags)
+------------------------------------
+- evenement_id (FK -> events.id)
+- tag_id (FK -> tags.id)
+- created_at, updated_at (timestamps)
+
+1.11 Table Orders (orders)
+----------------
+- id (PK, auto-increment)
+- user_id (FK -> users.id)
+- total_amount (decimal, 10,2)
+- status (string)
+- created_at, updated_at (timestamps)
+
+1.12 Table Order Items (order_items)
+-------------------
+- id (PK, auto-increment)
+- order_id (FK -> orders.id)
+- billet_id (FK -> billets.id)
+- quantite (integer)
+- prix_unitaire (decimal, 10,2)
+- created_at, updated_at (timestamps)
+
+1.13 Table Roles (roles) - Spatie
+-------------------
+- id (PK, auto-increment)
+- name (string)
+- guard_name (string)
+- created_at, updated_at (timestamps)
+
+1.14 Table Permissions (permissions) - Spatie
+------------------------
+- id (PK, auto-increment)
+- name (string)
+- guard_name (string)
+- created_at, updated_at (timestamps)
+
+1.15 Table Model Has Roles (model_has_roles) - Spatie
+--------------------------------
+- role_id (FK -> roles.id)
+- model_type (string)
+- model_id (bigint)
+
+1.16 Table Model Has Permissions (model_has_permissions) - Spatie
+----------------------------------------
+- permission_id (FK -> permissions.id)
+- model_type (string)
+- model_id (bigint)
+
+1.17 Table Role Has Permissions (role_has_permissions) - Spatie
+----------------------------------------
+- permission_id (FK -> permissions.id)
+- role_id (FK -> roles.id)
+
+1.18 Table Activity Log (activity_log)
+-------------------------
+- id (PK, auto-increment)
+- log_name (string, nullable)
+- description (text)
+- subject_type (string, nullable)
+- subject_id (bigint, nullable)
+- causer_type (string, nullable)
+- causer_id (bigint, nullable)
+- properties (json, nullable)
+- created_at, updated_at (timestamps)
+
+1.19 Table Error Logs (error_logs)
+----------------------
+- id (PK, auto-increment)
+- message (text)
+- code (string)
+- file (string)
+- line (integer)
+- trace (json)
+- created_at, updated_at (timestamps)
+
+1.20 Table Payment Logs (payment_logs)
+-----------------------
+- id (PK, auto-increment)
+- user_id (FK -> users.id)
+- order_id (FK -> orders.id)
+- amount (decimal, 10,2)
+- payment_method (string)
+- transaction_id (string)
+- status (string)
+- response_data (json)
+- created_at, updated_at (timestamps)
+
+1.21 Table Settings (settings)
+------------------
+- id (PK, auto-increment)
+- key (string, unique)
+- value (text)
+- group (string, nullable)
+- created_at, updated_at (timestamps)
+
+1.22 Table Email Templates (email_templates)
+----------------------------
+- id (PK, auto-increment)
+- name (string)
+- subject (string)
+- content (text)
+- variables (json)
+- created_at, updated_at (timestamps)
+
+1.23 Table Failed Jobs (failed_jobs)
+-----------------------
+- id (PK, auto-increment)
+- uuid (string, unique)
+- connection (text)
+- queue (text)
+- payload (longtext)
+- exception (longtext)
+- failed_at (timestamp)
+
+1.24 Table Jobs (jobs)
+------------
+- id (PK, auto-increment)
+- queue (string)
+- payload (longtext)
+- attempts (tinyint)
+- reserved_at (integer, nullable)
+- available_at (integer)
+- created_at (integer)
+
+1.25 Table Personal Access Tokens (personal_access_tokens)
+----------------------------------------
+- id (PK, auto-increment)
+- tokenable_type (string)
+- tokenable_id (bigint)
+- name (string)
+- token (string, unique)
+- abilities (text, nullable)
+- last_used_at (timestamp, nullable)
+- expires_at (timestamp, nullable)
+- created_at, updated_at (timestamps)
+
+2. RELATIONS ET CONTRAINTES
+
+2.1 Users -> Organisateurs
+- Relation One-to-One
+- Un utilisateur peut devenir organisateur après validation admin
+- La suppression d'un utilisateur entraîne la suppression de son profil organisateur (onDelete cascade)
+
+2.2 Organisateurs -> Events
+- Relation One-to-Many
+- Un organisateur peut créer plusieurs événements
+- La suppression d'un organisateur entraîne la suppression de ses événements (onDelete cascade)
+
+2.3 Events -> Billets
+- Relation One-to-Many
+- Un événement peut avoir plusieurs types de billets
+- La suppression d'un événement entraîne la suppression de ses billets (onDelete cascade)
+
+2.4 Events -> Categories
+- Relation Many-to-Many via table evenement_categories
+- Un événement peut appartenir à plusieurs catégories
+- Une catégorie peut contenir plusieurs événements
+
+2.5 Events -> Tags
+- Relation Many-to-Many via table evenement_tags
+- Un événement peut avoir plusieurs tags
+- Un tag peut être associé à plusieurs événements
+
+2.6 Roles -> Permissions (Spatie)
+- Relation Many-to-Many via table role_has_permissions
+- Un rôle peut avoir plusieurs permissions
+- Une permission peut être attribuée à plusieurs rôles
+
+2.7 Users -> Roles
+- Relation Many-to-Many via table model_has_roles
+- Un utilisateur peut avoir plusieurs rôles
+- Un rôle peut être attribué à plusieurs utilisateurs
+
+2.8 Users -> Permissions
+- Relation Many-to-Many via table model_has_permissions
+- Un utilisateur peut avoir plusieurs permissions directes
+- Une permission peut être attribuée à plusieurs utilisateurs
+
+2.9 Users -> Demandes Organisateur
+- Relation One-to-Many
+- Un utilisateur peut faire plusieurs demandes pour devenir organisateur
+- Chaque demande est liée à un seul utilisateur
+
+2.10 Organisateurs -> Demandes Publication Evenement
+- Relation One-to-Many
+- Un organisateur peut avoir plusieurs demandes de publication
+- Chaque demande est liée à un seul événement
+
+3. WORKFLOW FONCTIONNEL
+
+3.1 Inscription Utilisateur
+- Création compte utilisateur standard avec informations personnelles
+- Validation du compte par email
+- Statut initial: compte utilisateur standard
+
+3.2 Devenir Organisateur
+- Soumission du formulaire de demande avec:
+  * Informations sur l'entreprise
+  * Description de l'activité
+  * Expérience dans l'événementiel
+  * Lettre de motivation
+  * Documents justificatifs (optionnel)
+- Traitement de la demande par l'admin
+- Si approuvée:
+  * Création du profil organisateur
+  * Attribution du rôle organisateur
+  * Génération du code unique pour l'application de scan
+
+3.3 Création d'Événement
+- Création initiale de l'événement
+- Soumission de la demande de publication avec:
+  * Message de motivation
+  * Documents support (images, plans, autorisations, etc.)
+  * Détails complets de l'événement
+- Validation par l'admin
+- Si approuvée:
+  * Publication de l'événement
+  * Activation de la billetterie
+
+3.4 Gestion des Rôles et Permissions
+- Attribution des rôles par défaut lors de l'inscription
+- Gestion des permissions via l'interface admin
+- Synchronisation des rôles et permissions
+- Vérification des permissions pour chaque action
+
+4. POINTS D'ATTENTION POUR LA MODÉLISATION
+
+4.1 Diagramme de Classes
+- Mettre en évidence la séparation claire entre Users et Organisateurs
+- Représenter les tables pivot pour les relations many-to-many
+- Inclure les attributs essentiels de chaque entité
+- Montrer les cardinalités des relations
+
+4.2 Diagramme de Cas d'Utilisation
+Acteurs:
+- Utilisateur standard
+- Organisateur
+- Administrateur
+
+Cas d'utilisation principaux:
+- Gestion du compte utilisateur
+- Demande de passage en organisateur
+- Création et gestion d'événements
+- Validation des événements
+- Gestion de la billetterie
+- Gestion des catégories et tags
+- Processus de commande
+- Suivi des ventes

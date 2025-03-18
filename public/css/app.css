@@ -1,0 +1,224 @@
+/* ==========================================================================
+   Variables et configuration
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #187edd;
+    --primary-dark: #06485c;
+    --secondary-color: #ff8a04;
+    --dark-color: #111827;
+    --light-color: #F9FAFB;
+    --gray-color: #6B7280;
+    --surface-color: #FFFFFF;
+    --border-color: #E5E7EB;
+}
+
+/* ==========================================================================
+   Reset et styles de base
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--dark-color);
+    line-height: 1.6;
+    background-color: var(--light-color);
+}
+
+/* ==========================================================================
+   Typographie
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+    margin-bottom: 1rem;
+    color: var(--gray-color);
+}
+
+/* ==========================================================================
+   Composants
+   ========================================================================== */
+
+/* Boutons */
+.btn {
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    text-transform: none;
+    letter-spacing: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(24, 126, 221, 0.3);
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Formulaires */
+.form-control {
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(24, 126, 221, 0.25);
+}
+
+/* Cards */
+.card {
+    background: var(--surface-color);
+    border: none;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+/* Navigation */
+.navbar {
+    background-color: var(--surface-color);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 0;
+}
+
+.nav-link {
+    font-weight: 600;
+    color: var(--dark-color);
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, rgba(24, 126, 221, 0.9) 0%, rgba(6, 72, 92, 0.9) 100%);
+    padding: 12rem 0 8rem;
+    margin-top: -76px;
+    color: white;
+    position: relative;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: 4rem 0 2rem;
+    position: relative;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links a {
+    color: var(--light-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+/* ==========================================================================
+   Utilitaires
+   ========================================================================== */
+.text-primary { color: var(--primary-color) !important; }
+.bg-primary { background-color: var(--primary-color) !important; }
+.text-secondary { color: var(--secondary-color) !important; }
+.bg-secondary { background-color: var(--secondary-color) !important; }
+
+/* Espacements */
+.mb-1 { margin-bottom: 0.25rem !important; }
+.mb-2 { margin-bottom: 0.5rem !important; }
+.mb-3 { margin-bottom: 1rem !important; }
+.mb-4 { margin-bottom: 1.5rem !important; }
+.mb-5 { margin-bottom: 3rem !important; }
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@media (max-width: 991.98px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+
+    .hero-section {
+        padding: 8rem 0 6rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .hero-section {
+        padding: 6rem 0 4rem;
+    }
+
+    .footer {
+        padding: 3rem 0 1.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    h1 { font-size: 2rem; }
+
+    .btn {
+        padding: 0.5rem 1rem;
+    }
+}

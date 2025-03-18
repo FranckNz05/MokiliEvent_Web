@@ -1,0 +1,38 @@
+@startuml Sequence Diagram - Create Blog
+
+actor "Organisateur/Admin" as Author
+participant "Interface Web" as UI
+participant "Système" as System
+participant "Base de données" as DB
+
+Author -> UI: Accède à l'interface blog
+UI -> System: Demande formulaire
+System --> UI: Affiche éditeur blog
+
+Author -> UI: Rédige contenu
+Author -> UI: Ajoute médias
+Author -> UI: Soumet blog
+
+UI -> System: Valide contenu
+alt Contenu valide
+    System -> DB: Enregistre blog
+    DB --> System: Confirme enregistrement
+    
+    alt Auteur est Admin
+        System -> DB: Publie directement
+        DB --> System: Confirme publication
+        System --> UI: Confirme publication
+        UI --> Author: Affiche blog publié
+    else Auteur est Organisateur
+        System -> DB: Marque en attente
+        DB --> System: Confirme statut
+        System -> Admin: Notifie nouveau blog
+        System --> UI: Confirme soumission
+        UI --> Author: Affiche statut en attente
+    end
+else Contenu invalide
+    System --> UI: Retourne erreurs
+    UI --> Author: Affiche erreurs
+end
+
+@enduml

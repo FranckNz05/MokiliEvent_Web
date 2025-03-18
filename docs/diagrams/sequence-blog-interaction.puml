@@ -1,0 +1,74 @@
+@startuml Sequence Diagram - Blog Interaction
+
+actor "Utilisateur" as User
+participant "Interface Web" as UI
+participant "Système" as System
+participant "Base de données" as DB
+participant "Auteur Blog" as Author
+
+== Lecture et Réaction ==
+
+User -> UI: Accède au blog
+UI -> System: Demande contenu
+System -> DB: Récupère blog
+DB --> System: Retourne contenu
+System --> UI: Affiche blog
+
+alt Like/Unlike
+    User -> UI: Clique bouton like
+    UI -> System: Transmet action
+    System -> DB: Vérifie état précédent
+    
+    alt Pas encore liké
+        System -> DB: Ajoute like
+        DB --> System: Confirme
+        System -> Author: Notifie nouveau like
+    else Déjà liké
+        System -> DB: Retire like
+        DB --> System: Confirme
+    end
+    
+    System --> UI: Met à jour compteur
+    UI --> User: Affiche changement
+end
+
+== Commentaires ==
+
+User -> UI: Écrit commentaire
+User -> UI: Soumet commentaire
+UI -> System: Valide contenu
+
+alt Contenu valide
+    System -> DB: Enregistre commentaire
+    DB --> System: Confirme enregistrement
+    System -> Author: Notifie nouveau commentaire
+    System --> UI: Confirme publication
+    UI --> User: Affiche commentaire
+else Contenu invalide
+    System --> UI: Retourne erreurs
+    UI --> User: Affiche erreurs
+end
+
+== Réponses aux commentaires ==
+
+Author -> UI: Répond au commentaire
+UI -> System: Valide réponse
+System -> DB: Enregistre réponse
+DB --> System: Confirme enregistrement
+System -> User: Notifie réponse
+System --> UI: Met à jour discussion
+UI --> Author: Affiche réponse
+
+== Partage ==
+
+User -> UI: Clique partager
+UI -> System: Génère liens partage
+System --> UI: Retourne options
+UI --> User: Affiche options partage
+
+User -> UI: Sélectionne plateforme
+UI -> System: Prépare contenu
+System --> UI: Fournit lien
+UI --> User: Redirige vers partage
+
+@enduml

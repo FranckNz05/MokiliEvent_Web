@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\Ticket;
+use App\Models\User;
+use App\Models\Event;
+use App\Models\Order;
+use App\Models\Payment;
+class PaymentService
+{
+    public function processMobilePayment(Paiement $paiement)
+    {
+        $matricule = 'PAY-' .Str::upper(Str::random(6)) . '-' .time();
+
+        //Simulation API Mobile Money
+        $success = $this->callPaymentGateway($paiment);
+
+        if($success){
+            $paiement->update([
+                'matricule' => $matricule,
+                'status' => 'payé',
+                'qr_code' => $this->generateQrCode($matricule),
+            ]);
+
+            return true;
+        }
+
+        return false;
+    }
+
+
+    private function callPaymentGateway(Paiement $paiement)
+    {
+        //Intégration réelle avec les API mobiles
+        //Retourne true si le paiement est effectué avec succès
+        return rand(0,1);
+    }
+
+    private function generateQrCode(string $data)
+    {
+        $path = storage_path('app/public/qrcodes' .uniqid() . '.svg');
+        QRcode::generate($data, $path);
+        return asset('storage/' . basename($path));
+    }
+}

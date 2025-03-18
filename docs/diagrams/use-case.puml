@@ -1,0 +1,122 @@
+@startuml MokiliEvent - Use Case Diagram
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Visiteur" as visitor
+actor "Organisateur" as organizer
+actor "administrateur" as admin
+actor "Client" as client
+
+rectangle MokiliEvent {
+  ' Cas d'utilisation pour les visiteurs
+  usecase "Consulter les événements" as UC1
+  usecase "Consulter les blogs" as UC2
+  usecase "S'inscrire" as UC3
+  usecase "Se connecter" as UC4
+  usecase "Rechercher des événements" as UC5
+
+  ' Cas d'utilisation pour les utilisateurs
+  usecase "Gérer son profil" as UC6
+  usecase "Suivre un organisateur" as UC7
+  usecase "Réserver un billet" as UC8
+  usecase "Aimer un événement" as UC9
+  usecase "Commenter un événement" as UC10
+
+  ' Cas d'utilisation pour les organisateurs
+  usecase "Créer un événement" as UC11
+  usecase "Gérer ses événements" as UC12
+  usecase "Voir les statistiques" as UC13
+  usecase "Gérer les billets" as UC14
+
+  ' Cas d'utilisation pour l'administrateur
+  usecase "Gérer les utilisateurs" as UC15
+  usecase "Gérer les catégories" as UC16
+  usecase "Valider les événements" as UC17
+  usecase "Gérer les blogs" as UC18
+
+  ' admin use cases
+  usecase "Gérer les événements" as manageEvents
+  usecase "Gérer les blogs" as manageBlogs
+  usecase "Gérer les catégories" as manageCat
+  usecase "Gérer les utilisateurs" as manageclients
+  usecase "Voir les statistiques" as viewStats
+  usecase "Valider les demandes d'événements" as validateEvents
+  usecase "Gérer les paiements" as managePayments
+
+  ' Organisateur use cases
+  usecase "Créer des événements" as createEvent
+  usecase "Gérer ses événements" as manageOwnEvents
+  usecase "Gérer les billets" as manageTickets
+  usecase "Créer des blogs" as createBlog
+  usecase "Demander publication événement" as requestEventPub
+
+  ' Client use cases
+  usecase "Acheter des billets" as buyTickets
+  usecase "Rechercher des événements" as searchEvents
+  usecase "Interagir avec les blogs" as interactBlogs
+  usecase "Commenter les événements" as commentEvents
+  usecase "Voir historique d'achats" as viewHistory
+  usecase "Gérer commandes billets" as manageOrders
+  usecase "Demander statut organisateur" as requestOrgStatus
+}
+
+' Relations pour les visiteurs
+visitor --> UC1
+visitor --> UC2
+visitor --> UC3
+visitor --> UC4
+visitor --> UC5
+
+' Relations pour les utilisateurs
+client --> UC6
+client --> UC7
+client --> UC8
+client --> UC9
+client --> UC10
+' Héritage des droits du visiteur
+visitor <|-- client
+
+' Relations pour les organisateurs
+organizer --> UC11
+organizer --> UC12
+organizer --> UC13
+organizer --> UC14
+' Héritage des droits de l'utilisateur
+client <|-- organizer
+
+' Relations pour l'administrateur
+admin --> UC15
+admin --> UC16
+admin --> UC17
+admin --> UC18
+' L'administrateur hérite des droits de l'organisateur
+organizer <|-- admin
+
+' admin links
+admin --> manageEvents
+admin --> manageBlogs
+admin --> manageCat
+admin --> manageclients
+admin --> viewStats
+admin --> validateEvents
+admin --> managePayments
+
+' Organisateur links
+organizer --> createEvent
+organizer --> manageOwnEvents
+organizer --> manageTickets
+organizer --> createBlog
+organizer --> requestEventPub
+organizer --> interactBlogs
+
+' Client links
+client --> buyTickets
+client --> searchEvents
+client --> interactBlogs
+client --> commentEvents
+client --> viewHistory
+client --> manageOrders
+client --> requestOrgStatus
+
+@enduml

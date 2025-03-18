@@ -1,0 +1,38 @@
+@startuml Sequence Diagram - Book Ticket
+
+actor Client
+participant "Interface Web" as UI
+participant "Système" as System
+participant "Base de données" as DB
+participant "Système de paiement" as Payment
+
+Client -> UI: Sélectionne un événement
+UI -> System: Demande détails événement
+System -> DB: Récupère informations
+DB --> System: Retourne détails
+System --> UI: Affiche détails et disponibilité
+
+Client -> UI: Sélectionne type et quantité billets
+UI -> System: Vérifie disponibilité
+System -> DB: Vérifie stock
+DB --> System: Confirme disponibilité
+System --> UI: Affiche récapitulatif
+
+Client -> UI: Confirme achat
+UI -> System: Initie transaction
+System -> Payment: Demande paiement
+
+alt Paiement réussi
+    Payment --> System: Confirme paiement
+    System -> DB: Réserve billets
+    DB --> System: Confirme réservation
+    System -> DB: Enregistre transaction
+    System --> UI: Affiche confirmation
+    UI --> Client: Montre billets et reçu
+else Paiement échoué
+    Payment --> System: Signale échec
+    System --> UI: Affiche erreur
+    UI --> Client: Montre message d'erreur
+end
+
+@enduml

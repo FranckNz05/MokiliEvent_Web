@@ -1,0 +1,56 @@
+@startuml Sequence Diagram - Request Organizer Status
+
+actor Client
+participant "Interface Web" as UI
+participant "Système" as System
+participant "Base de données" as DB
+participant Admin
+
+Client -> UI: Demande formulaire organisateur
+UI -> System: Récupère formulaire
+System --> UI: Affiche formulaire
+
+Client -> UI: Remplit informations
+note right
+    - Nom de l'entreprise
+    - Description
+    - Documents justificatifs
+    - Coordonnées professionnelles
+end note
+
+Client -> UI: Soumet demande
+UI -> System: Valide données
+
+alt Données valides
+    System -> DB: Enregistre demande
+    DB --> System: Confirme enregistrement
+    System -> Admin: Notifie nouvelle demande
+    System --> UI: Confirme soumission
+    UI --> Client: Affiche confirmation
+else Données invalides
+    System --> UI: Retourne erreurs
+    UI --> Client: Affiche erreurs
+end
+
+== Processus de validation ==
+
+Admin -> System: Examine demande
+Admin -> System: Consulte documents
+
+alt Demande approuvée
+    Admin -> System: Approuve demande
+    System -> DB: Met à jour rôle utilisateur
+    System -> DB: Crée profil organisateur
+    DB --> System: Confirme changements
+    System -> Client: Envoie email confirmation
+    System --> Admin: Confirme changement
+else Demande refusée
+    Admin -> System: Refuse demande
+    Admin -> System: Ajoute motif refus
+    System -> DB: Met à jour statut demande
+    DB --> System: Confirme mise à jour
+    System -> Client: Envoie email refus
+    System --> Admin: Confirme action
+end
+
+@enduml

@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/FranckNz05/MokiliEvent_Web/blob/main/public/images/logo.png" width="300" alt="MokiliEvent Logo"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/FranckNz05/MokiliEvent_Web/main/public/images/logo.png" width="300" alt="MokiliEvent Logo"></p>
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/status-in%20progress-yellow.svg" alt="Status"></a>
